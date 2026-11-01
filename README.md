@@ -98,7 +98,7 @@ npm start
 
 | Variable | Required | Description |
 |---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | Optional (Recommended once domain is registered) | The public canonical URL of the website (e.g. `https://mezinfoodproducts.com`). If not set, falls back to `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` on Vercel, or `http://localhost:3000` in local development. When no production domain is configured, canonical URL, OpenGraph URLs, and sitemap advertising are omitted to prevent pointing search engines to unconfirmed domains. |
+| `NEXT_PUBLIC_SITE_URL` | Optional (Recommended once domain is registered) | The public canonical URL of the website (e.g. `https://your-domain.example`). If not set, falls back to `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` on Vercel, or `http://localhost:3000` in local development. When no production domain is configured, canonical URL, OpenGraph URLs, and sitemap advertising are omitted to prevent pointing search engines to unconfirmed domains. |
 
 ### Deploying to Vercel
 
