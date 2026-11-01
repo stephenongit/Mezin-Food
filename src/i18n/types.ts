@@ -1,0 +1,146 @@
+export type TranslationSchema = {
+  accessibility: {
+    languageSelection: string;
+    enquiryListStatus: string;
+    logoAlt: string;
+    mainNav: string;
+    mobileNav: string;
+    quickContact: string;
+    openDetails: (name: string) => string;
+    removeItem: (name: string) => string;
+  };
+  nav: {
+    home: string;
+    about: string;
+    products: string;
+    contact: string;
+    enquireWhatsapp: string;
+    callUs: (phone: string) => string;
+    menuOpen: string;
+    menuClose: string;
+  };
+  hero: {
+    badge: string;
+    headlinePrefix: string;
+    headlineAccent: string;
+    headlineFull: string;
+    subheadline: string;
+    primaryCta: string;
+    secondaryCta: string;
+    whatsappCta: string;
+    locationBadge: string;
+    locationValue: string;
+    processBadge: string;
+    processValue: string;
+    sourcingBadge: string;
+    sourcingValue: string;
+    productShelfBadge: string;
+    productShelfCount: string;
+    productShelfNote: string;
+    shelfLabels: {
+      chilli: string;
+      sambar: string;
+      podi: string;
+      ragi: string;
+      puttu: string;
+    };
+  };
+  about: {
+    badge: string;
+    title: string;
+    introP1: string;
+    introP2: string;
+    introP3: string;
+    activitiesTitle: string;
+    activitiesSubtitle: string;
+    spicesTitle: string;
+    spicesDesc: string;
+    flourTitle: string;
+    flourDesc: string;
+    batterTitle: string;
+    batterDesc: string;
+    rawTitle: string;
+    rawDesc: string;
+    howToEnquireTitle: string;
+    step1Title: string;
+    step1Desc: string;
+    step2Title: string;
+    step2Desc: string;
+    step3Title: string;
+    step3Desc: string;
+  };
+  products: {
+    badge: string;
+    title: string;
+    subtitle: string;
+    itemCount: string;
+    enquireWhatsapp: string;
+    addToList: string;
+    inList: string;
+    removeFromList: string;
+    viewDetails: string;
+    customCardTitle: string;
+    customCardDesc: string;
+    customCardCta: string;
+  };
+  modal: {
+    title: string;
+    close: string;
+    category: string;
+    description: string;
+    weights: string;
+    pricingNote: string;
+    enquireWhatsapp: string;
+    addToList: string;
+    inList: string;
+  };
+  enquiryDrawer: {
+    floatingButton: string;
+    title: string;
+    subtitle: string;
+    emptyTitle: string;
+    emptySubtitle: string;
+    selectedCount: string;
+    clearAll: string;
+    removeItem: string;
+    sendWhatsapp: string;
+    helperNotice: string;
+    closeDrawer: string;
+  };
+  contact: {
+    badge: string;
+    title: string;
+    subtitle: string;
+    addressHeading: string;
+    landmarkLabel: string;
+    landmarkValue: string;
+    phoneHeading: string;
+    phoneLabel: string;
+    whatsappHeading: string;
+    whatsappLabel: string;
+    whatsappDesc: string;
+    phoneDesc: string;
+    callButton: string;
+    whatsappButton: string;
+    directionsButton: string;
+    locationHeading: string;
+  };
+  mobileBar: {
+    whatsapp: string;
+    call: string;
+  };
+  footer: {
+    shortDesc: string;
+    quickLinks: string;
+    contactHeading: string;
+    copyright: string;
+    tagline: string;
+    chatWhatsapp: string;
+    locationFootnote: string;
+  };
+  whatsappMessages: {
+    singleProduct: (productName: string) => string;
+    multipleProducts: (productNames: string[]) => string;
+    general: string;
+  };
+};

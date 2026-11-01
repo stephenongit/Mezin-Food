@@ -1,23 +1,26 @@
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import Products from "@/components/Products";
-import About from "@/components/About";
-import ContactLocation from "@/components/ContactLocation";
-import Footer from "@/components/Footer";
-import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import React from "react";
+import { Navbar } from "@/components/Navbar";
+import { Hero } from "@/components/Hero";
+import { About } from "@/components/About";
+import { ProductCatalogue } from "@/components/ProductCatalogue";
+import { Contact } from "@/components/Contact";
+import { Footer } from "@/components/Footer";
+import { EnquiryDrawer } from "@/components/EnquiryDrawer";
+import { MobileBottomBar } from "@/components/MobileBottomBar";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="min-h-screen flex flex-col bg-cream text-brown antialiased selection:bg-gold-200">
       <Navbar />
       <main className="flex-1">
         <Hero />
-        <Products />
         <About />
-        <ContactLocation />
+        <ProductCatalogue />
+        <Contact />
       </main>
       <Footer />
-      <FloatingWhatsApp />
+      <EnquiryDrawer />
+      <MobileBottomBar />
     </div>
   );
 }

@@ -1,120 +1,101 @@
-import type { Metadata } from "next";
-import { Inter, Playfair_Display, Noto_Sans_Tamil } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Plus_Jakarta_Sans, Playfair_Display, Noto_Sans_Tamil } from "next/font/google";
 import "./globals.css";
-import { SITE_CONFIG } from "@/data/siteConfig";
+import { siteConfig } from "@/config/site";
+import { siteUrl, configuredSiteUrl, hasConfiguredSiteUrl } from "@/config/env";
+import { LanguageProvider } from "@/context/LanguageContext";
+import { EnquiryProvider } from "@/context/EnquiryContext";
 
-const inter = Inter({
+const fontSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
   variable: "--font-sans",
-  subsets: ["latin"],
+  display: "swap",
   weight: ["400", "500", "600", "700"],
-  display: "swap",
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-serif",
+const fontSerif = Playfair_Display({
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  variable: "--font-serif",
   display: "swap",
-});
-
-const notoSansTamil = Noto_Sans_Tamil({
-  variable: "--font-tamil",
-  subsets: ["tamil"],
   weight: ["500", "600", "700"],
-  display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Mezin Food Products | Spices & Traditional Flours",
-  description:
-    "Mezin Food Products (MFP) offers freshly ground spices, flours, and traditional food products prepared with care in Saravanampatti, Coimbatore.",
-  keywords: [
-    "Mezin Food Products",
-    "MFP",
-    "MFP Food Product",
-    "Chilli Powder",
-    "மிளகாய் தூள்",
-    "Sambar Powder",
-    "சாம்பார் தூள்",
-    "Idli Podi",
-    "இட்லி பொடி",
-    "Ragi Flour",
-    "ராகி மாவு",
-    "Mappillai Samba Puttu Flour",
-    "மாப்பிள்ளை சம்பா புட்டு மாவு",
-    "Coimbatore food products",
-    "Saravanampatti spice mill",
-  ],
-  authors: [{ name: "Mezin Food Products" }],
-  metadataBase: new URL("https://mezinfood.com"),
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    title: "Mezin Food Products | Spices & Traditional Flours",
-    description:
-      "Mezin Food Products (MFP) offers freshly ground spices, flours, and traditional food products prepared with care in Saravanampatti, Coimbatore.",
-    url: "https://mezinfood.com",
-    siteName: "Mezin Food Products",
-    locale: "en_IN",
-    type: "website",
-    images: [
-      {
-        url: "/mfp-logo.png",
-        width: 500,
-        height: 500,
-        alt: "Mezin Food Products (MFP) - Healthy and Tasty",
-      },
-    ],
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
+const fontTamil = Noto_Sans_Tamil({
+  subsets: ["tamil"],
+  variable: "--font-tamil",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#FAF7F2",
 };
 
-const jsonLdLocalBusiness = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: SITE_CONFIG.brandName,
-  alternateName: SITE_CONFIG.brandAbbreviation,
-  image: "https://mezinfood.com/mfp-logo.png",
-  telephone: SITE_CONFIG.phone,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: `${SITE_CONFIG.address.line1}, ${SITE_CONFIG.address.line2}`,
-    addressLocality: `${SITE_CONFIG.address.area}, ${SITE_CONFIG.address.city}`,
-    addressRegion: "Tamil Nadu",
-    postalCode: SITE_CONFIG.address.postalCode,
-    addressCountry: "IN",
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: "Mezin Food Products | Traditional Food Products in Coimbatore",
+  description:
+    "Explore Mezin Food Products in Saravanampatti, Coimbatore. Discover our range of spice powders, flour products and traditional food offerings.",
+  authors: [{ name: "Mezin Food Products" }],
+  // TODO: Replace icon.jpg with transparent PNG/SVG favicon once provided by owner
+  icons: {
+    icon: "/icon.jpg",
   },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: SITE_CONFIG.mapLocation.lat,
-    longitude: SITE_CONFIG.mapLocation.lng,
+  openGraph: {
+    title: "Mezin Food Products | Saravanampatti, Coimbatore",
+    description:
+      "Local food-processing business in Saravanampatti, Coimbatore. We grind spices and flour, prepare batter and pack selected raw ingredients.",
+    type: "website",
+    locale: "en_IN",
+    siteName: "Mezin Food Products",
   },
-  hasMap: SITE_CONFIG.mapLocation.directUrl,
-  priceRange: "₹",
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
+  // Verified JSON-LD structured data (no unsupplied facts like ratings, hours, etc.)
+  const jsonLd: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: siteConfig.name,
+    alternateName: siteConfig.shortName,
+    telephone: `+${siteConfig.rawPhone}`,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: `${siteConfig.address.line1}, ${siteConfig.address.line2}`,
+      addressLocality: "Saravanampatti, Coimbatore",
+      addressRegion: "Tamil Nadu",
+      postalCode: siteConfig.address.pincode,
+      addressCountry: "IN",
+    },
+    description:
+      "Local food-processing business in Saravanampatti, Coimbatore. We grind spices and flour, prepare batter and pack selected raw ingredients.",
+  };
+
+  // Only include external URL and image when a production domain is configured
+  if (hasConfiguredSiteUrl && configuredSiteUrl) {
+    jsonLd.url = configuredSiteUrl;
+    jsonLd.image = `${configuredSiteUrl}/images/mfp-logo.jpg`;
+  }
+
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${playfair.variable} ${notoSansTamil.variable} scroll-smooth antialiased`}
-    >
+    <html lang="en" className={`${fontSans.variable} ${fontSerif.variable} ${fontTamil.variable}`}>
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdLocalBusiness) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-ivory text-chocolate selection:bg-olive selection:text-ivory flex flex-col min-h-screen">
-        {children}
+      <body className="min-h-screen bg-cream font-sans text-brown antialiased selection:bg-gold-100 selection:text-brown-900 pb-16 md:pb-0">
+        <LanguageProvider>
+          <EnquiryProvider>{children}</EnquiryProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

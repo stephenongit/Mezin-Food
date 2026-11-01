@@ -1,121 +1,154 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@layer base {
-  :root {
-    --bg-ivory: #FAF7F2;
-    --bg-ivory-card: #FFFEFA;
-    --bg-linen: #F1EBE0;
-    --bg-sand: #E5DDCF;
-
-    --color-chocolate: #22150D;
-    --color-chocolate-muted: #48382D;
-    --color-chocolate-soft: #635043;
-
-    --color-olive: #5B6F47;
-    --color-olive-dark: #3E4E2E;
-    --color-olive-light: #7D9269;
-
-    --color-wheat: #C7AE87;
-    --color-wheat-light: #EBE1D0;
-
-    --color-chilli: #A83823;
-
-    --color-card-border: rgba(34, 21, 13, 0.12);
-  }
-
-  html {
-    scroll-behavior: smooth;
-    background-color: var(--bg-ivory);
-    color: var(--color-chocolate);
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  body {
-    background-color: var(--bg-ivory);
-    color: var(--color-chocolate);
-    font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
-    overflow-x: hidden;
-  }
-
-  h1, h2, h3, h4 {
-    font-family: var(--font-serif), Georgia, serif;
-  }
+:root {
+  --bg-cream: #FAF7F2;
+  --bg-beige: #F4EDE0;
+  --text-brown: #2C1810;
+  --color-olive: #496335;
+  --color-gold: #C89539;
+  --color-terracotta: #983C25;
 }
 
-@theme {
-  --color-ivory: var(--bg-ivory);
-  --color-ivory-card: var(--bg-ivory-card);
-  --color-linen: var(--bg-linen);
-  --color-sand: var(--bg-sand);
-
-  --color-chocolate: var(--color-chocolate);
-  --color-chocolate-muted: var(--color-chocolate-muted);
-  --color-chocolate-soft: var(--color-chocolate-soft);
-
-  --color-olive: var(--color-olive);
-  --color-olive-dark: var(--color-olive-dark);
-  --color-olive-light: var(--color-olive-light);
-
-  --color-wheat: var(--color-wheat);
-  --color-wheat-light: var(--color-wheat-light);
-
-  --color-chilli: var(--color-chilli);
-
-  --font-sans: var(--font-sans), system-ui, -apple-system, sans-serif;
-  --font-serif: var(--font-serif), Georgia, serif;
-  --font-tamil: var(--font-tamil), sans-serif;
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem; /* Ensure section badges/titles never hide under sticky header */
+  background-color: #FAF7F2;
+  color: #2C1810;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Custom Tamil font helper */
-.tamil-text {
+/* Tamil Typography Enhancement: Tamil needs slightly more line height for comfortable reading */
+:lang(ta),
+.font-tamil {
+  line-height: 1.65;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* Ensure Tamil mode uses Noto Sans Tamil across all text and serif headings */
+html[lang="ta"] body,
+html[lang="ta"] .font-serif {
   font-family: var(--font-tamil), var(--font-sans), sans-serif;
 }
 
-/* Editorial Minimalist Product Card */
-.catalog-card {
-  border: 1px solid var(--color-card-border);
-  background-color: var(--bg-ivory-card);
-  transition: transform 220ms ease, box-shadow 220ms ease;
+/* Tamil body text must be at least 14px: lift every 12px (text-xs) utility in Tamil mode.
+   text-xs only ever appears alone or paired with sm:text-sm (same 14px), so this is safe. */
+html[lang="ta"] .text-xs {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
-@media (hover: hover) {
-  .catalog-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 22px -8px rgba(34, 21, 13, 0.08);
-  }
-}
-
-/* Focus styling for keyboard accessibility */
-a:focus-visible, button:focus-visible {
-  outline: 2px solid var(--color-olive);
-  outline-offset: 2px;
-}
-
-/* Scrollbar hiding for horizontal scroll containers */
-.scrollbar-none::-webkit-scrollbar {
-  display: none;
-}
-.scrollbar-none {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Button micro-interaction feedback */
-.btn-press {
-  transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1), background-color 200ms ease, box-shadow 200ms ease;
-}
-.btn-press:active {
-  transform: scale(0.98);
-}
-
+/* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
+}
+
+/* Custom subtle traditional Kolam / spice geometric patterns */
+.pattern-kolam {
+  background-color: #FAF7F2;
+  background-image: radial-gradient(rgba(200, 149, 57, 0.15) 0.75px, transparent 0.75px),
+    radial-gradient(rgba(200, 149, 57, 0.15) 0.75px, #FAF7F2 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
+.pattern-dots {
+  background-image: radial-gradient(rgba(73, 99, 53, 0.12) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.pattern-traditional-border {
+  background-image: linear-gradient(
+    90deg,
+    #C89539 0%,
+    #496335 25%,
+    #983C25 50%,
+    #496335 75%,
+    #C89539 100%
+  );
+}
+
+/* Animation utilities matching tailwindcss-animate syntax */
+@layer utilities {
+  .animate-in {
+    animation-duration: 0.25s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    animation-fill-mode: both;
+  }
+  .fade-in {
+    animation-name: fadeIn;
+  }
+  .zoom-in-95 {
+    animation-name: zoomIn95;
+  }
+  .slide-in-from-top {
+    animation-name: slideInTop;
+  }
+  .slide-in-from-right {
+    animation-name: slideInRight;
+  }
+  .slide-in-from-bottom-4 {
+    animation-name: slideInBottom4;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zoomIn95 {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInTop {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slideInBottom4 {
+  from { opacity: 0; transform: translateY(1rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAF7F2;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D6C0B4;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B89684;
+}
+
+/* Accessible focus ring */
+:focus-visible {
+  outline: 2px solid #496335;
+  outline-offset: 3px;
 }

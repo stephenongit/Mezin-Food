@@ -1,126 +1,82 @@
-export interface ProductImage {
-  src: string;
-  alt: string;
-  isPlaceholder: boolean;
-}
-
-export type ProductCategory = "Spice Powders" | "Flours" | "Puttu Flour" | "Batters";
-
-export interface Product {
-  id: string;
-  index: string;
-  nameEnglish: string;
-  nameTamil: string;
-  category: ProductCategory;
-  categoryTamil: string;
-  weight?: string;
+export type ProductVariant = {
+  weight: string;
   price?: number;
-  description: string;
-  image: ProductImage;
-}
+};
 
-export const PRODUCTS: Product[] = [
+export type Product = {
+  id: string;
+  nameEn: string;
+  nameTa: string;
+  categoryEn: string;
+  categoryTa: string;
+  descriptionEn: string;
+  descriptionTa: string;
+  image?: string; // e.g. "/images/products/chilli-powder.webp". If absent, motif is rendered.
+  variants?: ProductVariant[]; // Omit entirely until supplied by business owner
+  descriptionIsPlaceholder: boolean;
+  accentColor: string;
+  motifType: "chilli" | "sambar" | "podi" | "ragi" | "puttu";
+};
+
+export const products: Product[] = [
   {
     id: "chilli-powder",
-    index: "01",
-    nameEnglish: "Chilli Powder",
-    nameTamil: "மிளகாய் தூள்",
-    category: "Spice Powders",
-    categoryTamil: "பொடி வகைகள்",
-    weight: "250 g",
-    price: 80,
-    description: "Freshly ground chilli powder.",
-    image: {
-      src: "/images/chilli-powder.jpg",
-      alt: "Chilli Powder in transparent clear pouch - மிளகாய் தூள்",
-      isPlaceholder: true,
-    },
+    nameEn: "Chilli Powder",
+    nameTa: "மிளகாய் தூள்",
+    categoryEn: "Spice powder",
+    categoryTa: "மசாலா தூள்",
+    descriptionEn: "Ground chilli powder for everyday cooking.",
+    descriptionTa: "தினசரி சமையலுக்கான அரைத்த மிளகாய் தூள்.",
+    descriptionIsPlaceholder: true,
+    accentColor: "#983C25",
+    motifType: "chilli",
   },
   {
     id: "sambar-powder",
-    index: "02",
-    nameEnglish: "Sambar Powder",
-    nameTamil: "சாம்பார் தூள்",
-    category: "Spice Powders",
-    categoryTamil: "பொடி வகைகள்",
-    weight: "250 g",
-    price: 80,
-    description: "Aromatic spice blend for sambar.",
-    image: {
-      src: "/images/sambar-powder.jpg",
-      alt: "Sambar Powder in transparent clear pouch - சாம்பார் தூள்",
-      isPlaceholder: true,
-    },
+    nameEn: "Sambar Powder",
+    nameTa: "சாம்பார் தூள்",
+    categoryEn: "Spice powder",
+    categoryTa: "மசாலா தூள்",
+    descriptionEn: "Spice powder for preparing sambar.",
+    descriptionTa: "சாம்பார் தயாரிப்பதற்கான மசாலா தூள்.",
+    descriptionIsPlaceholder: true,
+    accentColor: "#C89539",
+    motifType: "sambar",
   },
   {
     id: "idli-podi",
-    index: "03",
-    nameEnglish: "Idli Podi",
-    nameTamil: "இட்லி பொடி",
-    category: "Spice Powders",
-    categoryTamil: "பொடி வகைகள்",
-    weight: "100 g",
-    price: 40,
-    description: "Tasty traditional idli podi.",
-    image: {
-      src: "/images/idli-podi-v2.jpg",
-      alt: "Idli Podi in transparent clear pouch - இட்லி பொடி",
-      isPlaceholder: true,
-    },
+    nameEn: "Idli Podi",
+    nameTa: "இட்லி பொடி",
+    categoryEn: "Podi",
+    categoryTa: "பொடி",
+    descriptionEn: "A traditional South Indian accompaniment for idli and dosa.",
+    descriptionTa: "இட்லி மற்றும் தோசைக்கான பாரம்பரிய தென்னிந்திய பொடி.",
+    descriptionIsPlaceholder: true,
+    accentColor: "#7A5239",
+    motifType: "podi",
   },
   {
     id: "ragi-flour",
-    index: "04",
-    nameEnglish: "Ragi Flour",
-    nameTamil: "ராகி மாவு",
-    category: "Flours",
-    categoryTamil: "மாவு வகைகள்",
-    weight: "500 g",
-    price: 35,
-    description: "Nutritious ragi flour.",
-    image: {
-      src: "/images/ragi-flour.jpg",
-      alt: "Ragi Flour in transparent clear pouch - ராகி மாவு",
-      isPlaceholder: true,
-    },
+    nameEn: "Ragi Flour",
+    nameTa: "ராகி மாவு",
+    categoryEn: "Flour",
+    categoryTa: "மாவு",
+    descriptionEn: "Flour ground from ragi (finger millet).",
+    descriptionTa: "கேழ்வரகிலிருந்து (ராகி) அரைக்கப்பட்ட மாவு.",
+    descriptionIsPlaceholder: true,
+    accentColor: "#496335",
+    motifType: "ragi",
   },
   {
-    id: "puttu-flour",
-    index: "05",
-    nameEnglish: "Mappillai Samba Puttu Flour",
-    nameTamil: "மாப்பிள்ளை சம்பா புட்டு மாவு",
-    category: "Puttu Flour",
-    categoryTamil: "புட்டு மாவு",
-    weight: "500 g",
-    price: 55,
-    description: "Traditional Mappillai Samba puttu flour.",
-    image: {
-      src: "/images/puttu-flour.jpg",
-      alt: "Mappillai Samba Puttu Flour in transparent clear pouch - மாப்பிள்ளை சம்பா புட்டு மாவு",
-      isPlaceholder: true,
-    },
-  },
-  {
-    id: "idli-dosa-batter",
-    index: "06",
-    nameEnglish: "Idli / Dosa Batter",
-    nameTamil: "இட்லி / தோசை மாவு",
-    category: "Batters",
-    categoryTamil: "மாவு வகைகள்",
-    price: 30,
-    description: "Freshly prepared traditional batter.",
-    image: {
-      src: "/images/idli-dosa-batter-v2.jpg",
-      alt: "Idli / Dosa Batter in transparent clear plastic bag tied with rubber band - இட்லி / தோசை மாவு",
-      isPlaceholder: true,
-    },
+    id: "mappillai-samba-puttu",
+    nameEn: "Mappillai Samba Puttu",
+    nameTa: "மாப்பிள்ளை சம்பா புட்டு",
+    categoryEn: "Puttu",
+    categoryTa: "புட்டு",
+    descriptionEn: "A traditional South Indian puttu product made from Mappillai Samba.",
+    descriptionTa: "மாப்பிள்ளை சம்பா அரிசியால் செய்யப்பட்ட பாரம்பரிய தென்னிந்திய புட்டு மாவு தயாரிப்பு.",
+    descriptionIsPlaceholder: true,
+    accentColor: "#5E3924",
+    motifType: "puttu",
   },
 ];
-
-export const CATEGORIES = [
-  { id: "ALL", label: "All Products" },
-  { id: "Spice Powders", label: "Spice Powders" },
-  { id: "Flours", label: "Flours" },
-  { id: "Puttu Flour", label: "Puttu Flour" },
-  { id: "Batters", label: "Batters" },
-] as const;

@@ -1,29 +1,34 @@
 {
-  "name": "mezin-app",
+  "name": "mezin-food-products",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "next lint",
+    "check:classes": "node scripts/check-classes.mjs",
+    "check:claims": "node scripts/check-claims.mjs",
+    "check:tamil": "node scripts/check-tamil-latin.mjs",
+    "e2e": "node scripts/e2e.mjs",
+    "verify": "npm run check:classes && npm run check:claims && npm run check:tamil"
   },
   "dependencies": {
-    "framer-motion": "^13.1.1",
-    "lucide-react": "^1.35.0",
-    "next": "16.3.3",
-    "next-themes": "^0.4.6",
-    "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.453.0",
+    "next": "^14.2.15",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^2.5.4"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.3.3",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "@types/node": "^20.17.0",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "autoprefixer": "^10.4.20",
+    "playwright": "^1.64.1",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.3"
   }
 }
