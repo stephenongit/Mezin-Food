@@ -80,9 +80,9 @@ Note: Google Fonts may be unreachable in a sandbox. If a build fails only becaus
 - "Our Products" heading.
 - "From Our Mill" wording removed everywhere.
 - Product photos wired in as AI-generated placeholders (e39fa84).
+- README example domain changed to `https://your-domain.example` (8630635).
 
 **Still open:**
-- The README's example domain (`mezinfoodproducts.com`) looks like a real address. Change it to `https://your-domain.example`.
 - `hero-spices.jpg` and `idli-dosa-batter-v2.jpg` in `public/products/` are unused.
 - The batter product is not one of the five products (owner decision).
 - Antigravity's "8px short" widths were a test-window artifact, not a site bug. Playwright at exact viewports shows `scrollWidth` equals `innerWidth`.
